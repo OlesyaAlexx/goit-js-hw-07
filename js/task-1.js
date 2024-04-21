@@ -1,31 +1,20 @@
-const customer = {
-  username: 'Mango',
-  balance: 24000,
-  discount: 0.1,
-  orders: ['Burger', 'Pizza', 'Salad'],
+const categoriesListEl = document.querySelector('#categories');
+const categoriesItemsEl = categoriesListEl.querySelectorAll('.item');
 
-  // Додаємо ключове слово this до методів об"єкта
+//Виводимо в консоль кількість елементів li що є дітьми списку ul з id = #categories
+console.log(`Number of Categories: ${categoriesItemsEl.length}`);
 
-  getBalance() {
-    return this.balance;
-  },
-  getDiscount() {
-    return this.discount;
-  },
-  setDiscount(value) {
-    this.discount = value;
-  },
-  getOrders() {
-    return this.orders;
-  },
-  addOrder(cost, order) {
-    this.balance -= cost - cost * this.discount;
-    this.orders.push(order);
-  },
-};
+// Перебираємо всі елементи списку ul(#categories) за допомогою методу forEach, створюємо
+// змінну categoryTitleName в яку буде входити тег h2 з текстовим контентом, та
+// змінну categoryElements в яку відберемо всіх нащадків ul(#categories), теги li
+// (створиться псевдомасив)
+categoriesItemsEl.forEach(category => {
+  const categoryTitleName = category.querySelector('h2').textContent;
+  const categoryElements = category.querySelectorAll('li');
 
-customer.setDiscount(0.15);
-console.log(customer.getDiscount()); // 0.15
-customer.addOrder(5000, 'Steak');
-console.log(customer.getBalance()); // 19750
-console.log(customer.getOrders()); // ["Burger", "Pizza", "Salad", "Steak"]
+  // Виводимо в консоль текстовий контент тегу h2
+  console.log(`Category: ${categoryTitleName}`);
+
+  // Виводимо  в консоль значення кількості елементів li, використовуючи метод довжини(length)
+  console.log(`Elements: ${categoryElements.length}`);
+});

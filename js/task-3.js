@@ -1,40 +1,23 @@
-class StringBuilder {
-  // Оголошуємо приватну властивсть класу - об"єкт
-  #value = {
-    initialValue: '',
-  };
+//Створюємо масив посилань для роботи з даними введеними в поле input
+// та отримуємо до них доступ за допомогою методу querySelector
+const refs = {
+  input: document.querySelector('#name-input'),
+  nameOutput: document.querySelector('#name-output'),
+};
 
-  // Оголошуємо метод класу constructor
-  constructor(value) {
-    this.#value.initialValue = value;
-  }
+console.log(refs.input);
+console.log(refs.nameOutput);
 
-  // Оголошуємо метод getValue() який повертає поточне значення приватної властивості value
-  getValue() {
-    return this.#value.initialValue;
-  }
+//Встановлюємо прослуховувач подій ('input')  на елемент з id #name-input та передаєм колбек функцію
+refs.input.addEventListener('input', onInputChange);
 
-  // Оголошуємо метод  padEnd(str) який додає параметр str (рядок) в кінець значення приватної властивості value об'єкта
-  padEnd(str) {
-    this.#value.initialValue += `${str}`;
-  }
-
-  // Оголошуємо метод padStart(str) який додає параметр str (рядок) на початок значення приватної властивості value об'єкта
-  padStart(str) {
-    this.#value.initialValue = `${str}${this.#value.initialValue}`;
-  }
-
-  // Оголошуємо метод padBoth(str) який додає параметр str (рядок)  і на початок значення приватної властивості value об'єкта і в кінець властивості
-  padBoth(str) {
-    this.#value.initialValue = `${str}${this.#value.initialValue}${str}`;
+//Оголошуємо функцію, яка буде перевіряти значення введені коистувачем в поле "input"
+// та виводити його як привітання в span з id #name-output
+function onInputChange(event) {
+  const trimmedValue = event.currentTarget.value.trim();
+  if (trimmedValue === '') {
+    refs.nameOutput.textContent = 'Anonymous';
+  } else {
+    refs.nameOutput.textContent = trimmedValue;
   }
 }
-
-const builder = new StringBuilder('.');
-console.log(builder.getValue()); // "."
-builder.padStart('^');
-console.log(builder.getValue()); // "^."
-builder.padEnd('^');
-console.log(builder.getValue()); // "^.^"
-builder.padBoth('=');
-console.log(builder.getValue()); // "=^.^="
