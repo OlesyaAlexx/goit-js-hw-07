@@ -28,17 +28,18 @@ function createBoxes(amount) {
   // Викликаємо функцію clearBoxes(), щоб очистити контейнер перед створенням нових блоків
   clearBoxes();
 
-  //Створюємо нові бокси і додаємо їх в 'div' зі значенням id boxes
+  // Створюємо змінну для зберігання HTML-рядка
+  let boxesHTML = '';
+
+  // Створюємо HTML-рядок для кожного боксу
   for (let i = 0; i < amount; i++) {
-    const divBoxElement = document.createElement('div');
     const size = 30 + i * 10;
     const randomColor = getRandomHexColor();
-    divBoxElement.style.width = `${size}px`;
-    divBoxElement.style.height = `${size}px`;
-    divBoxElement.style.backgroundColor = randomColor;
-    divBoxElement.style.marginBottom = '10px';
-    boxesEl.appendChild(divBoxElement);
+    boxesHTML += `<div style="width: ${size}px; height: ${size}px; background-color: ${randomColor}; margin-bottom: 10px;"></div>`;
   }
+
+  // Встановлюємо зібраний HTML-рядок як innerHTML для елементу div#boxes
+  boxesEl.innerHTML = boxesHTML;
 
   // Очищаємо значення в інпуті
   numberInputEl.value = '';
